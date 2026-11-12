@@ -5,8 +5,8 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB = credentials('dockerhub') // DOCKERHUB_USR / DOCKERHUB_PSW
-    IMAGE     = "${DOCKERHUB_USR}/queimadas-api"
+    REGISTRY  = credentials('ghcr') // REGISTRY_USR / REGISTRY_PSW (PAT classic, write:packages)
+    IMAGE     = 'ghcr.io/luizbrito7/queimadas-api'
     TAG       = "${env.GIT_COMMIT.take(7)}"
     RUN       = "docker run --rm -v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
   }
@@ -27,7 +27,7 @@ pipeline {
     stage('SonarQube') {
       steps {
         withSonarQubeEnv('sonarqube') {
-          sh '$RUN --network devops -e SONAR_HOST_URL -e SONAR_TOKEN=$SONAR_AUTH_TOKEN sonarsource/sonar-scanner-cli'
+          sh '$RUN --network devops -e SONAR_HOST_URL -e SONAR_TOKEN=$SONAR_AUTH_TOKEN sonarsource/sonar-scanner-cli -Dsonar.projectBaseDir=$WORKSPACE -Dsonar.working.directory=$WORKSPACE/.scannerwork'
         }
       }
     }
@@ -62,7 +62,7 @@ pipeline {
     stage('Push') {
       steps {
         sh '''
-          echo "$DOCKERHUB_PSW" | docker login -u "$DOCKERHUB_USR" --password-stdin
+          echo "$REGISTRY_PSW" | docker login ghcr.io -u "$REGISTRY_USR" --password-stdin
           docker push $IMAGE:$TAG
           docker push $IMAGE:latest
         '''
@@ -86,6 +86,6 @@ pipeline {
   }
 
   post {
-    always { sh 'docker logout || true' }
+    always { sh 'docker logout ghcr.io || true' }
   }
 }
