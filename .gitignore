@@ -2,3 +2,7 @@ __pycache__/
 .venv/
 .pytest_cache/
 *.pdf
+.terraform/
+*.tfstate*
+.terraform.lock.hcl
+tfplan
