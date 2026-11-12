@@ -1,0 +1,34 @@
+# Jenkins + SonarQube na VM (separado do compose da aplicação)
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    ports:
+      - "8080:8080"
+    group_add:
+      - "${DOCKER_GID:-988}" # grupo docker da VM, para usar o socket
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # mesmo caminho no host e no container: `docker run -v $WORKSPACE:...` funciona
+      - /var/jenkins_home:/var/jenkins_home
+    restart: unless-stopped
+
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonar_data:/opt/sonarqube/data
+      - sonar_extensions:/opt/sonarqube/extensions
+      - sonar_logs:/opt/sonarqube/logs
+    restart: unless-stopped
+
+networks:
+  default:
+    name: devops # scanner e Trivy rodam como containers nessa rede
+
+volumes:
+  sonar_data:
+  sonar_extensions:
+  sonar_logs:
