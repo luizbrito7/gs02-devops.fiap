@@ -11,4 +11,7 @@ RUN apt-get update && apt-get install -y ca-certificates curl && \
     apt-get update && apt-get install -y docker-ce-cli docker-compose-plugin && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 USER jenkins
-RUN jenkins-plugin-cli --plugins workflow-aggregator git github sonar credentials-binding pipeline-stage-view
+RUN jenkins-plugin-cli --plugins workflow-aggregator git github sonar credentials-binding \
+    pipeline-stage-view configuration-as-code job-dsl
+ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false \
+    CASC_JENKINS_CONFIG=/casc/jenkins.yaml

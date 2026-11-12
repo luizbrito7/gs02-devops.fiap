@@ -6,12 +6,14 @@ services:
       dockerfile: Dockerfile.jenkins
     ports:
       - "8080:8080"
+    env_file: .env # segredos usados pelo jenkins.yaml (JCasC)
     group_add:
       - "${DOCKER_GID:-988}" # grupo docker da VM, para usar o socket
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # mesmo caminho no host e no container: `docker run -v $WORKSPACE:...` funciona
       - /var/jenkins_home:/var/jenkins_home
+      - ./jenkins.yaml:/casc/jenkins.yaml:ro
     restart: unless-stopped
 
   sonarqube:
