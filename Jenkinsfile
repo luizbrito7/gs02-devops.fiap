@@ -19,7 +19,7 @@ pipeline {
   stages {
     stage('Testes') {
       steps {
-        sh '$RUN python:3.12-slim sh -c "pip install -q -r requirements-dev.txt && pytest -q --cov=app --cov-report=xml --junitxml=junit.xml"'
+        sh '$RUN python:3.12-slim sh -c "pip install -q -r requirements-dev.txt && python -m pytest -q --cov=app --cov-report=xml --junitxml=junit.xml"'
       }
       post { always { junit 'junit.xml' } }
     }
