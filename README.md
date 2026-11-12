@@ -3,15 +3,9 @@
 <p align="center"><img src="docs/arch.gif" alt="Arquitetura: GitHub → Jenkins (pytest, SonarQube, docker build, Trivy) → GHCR → deploy com Docker Compose, numa VM Azure provisionada com Terraform" /></p>
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="40" alt="Python" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" height="40" alt="FastAPI" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" height="40" alt="GitHub" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="40" alt="Jenkins" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sonarqube/sonarqube-original.svg" height="40" alt="SonarQube" />
-  <img src="https://cdn.simpleicons.org/trivy" height="40" alt="Trivy" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="40" alt="Docker" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" height="40" alt="Terraform" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" height="40" alt="Azure" />
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=python,fastapi,github,jenkins,docker,terraform,azure,ubuntu" alt="Stacks" />
+  </a>
 </p>
 
 API com focos de queimadas por bioma e mês (INPE, 2024-2025), usada como aplicação de uma pipeline DevSecOps de CI/CD: testes, qualidade, segurança, imagem Docker e deploy automatizado.
