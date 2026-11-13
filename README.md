@@ -14,6 +14,8 @@ API com focos de queimadas por bioma e mês (INPE, 2024-2025), usada como aplica
 
 **Vídeo (1:20):** https://youtu.be/Oe6oRs7hoRA: pipeline ponta a ponta, troubleshooting do Trivy e a API no ar.
 
+**Relatório técnico:** [docs/relatorio-tecnico.pdf](docs/relatorio-tecnico.pdf)
+
 ## Endpoints
 
 | Método | Rota | Descrição |
